@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>HOME PAGE</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: white;
+      padding: 8px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      width: 100%;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      background-color: transparent;
+      padding: 10px 5px;
+      /* 点击动效基础样式 */
+      transition: transform 0.2s ease;
+      touch-action: manipulation;
+      /* 优化移动端触摸体验 */
+    }
+
+    /* 移动端点击放大缩小效果 */
+    .item:active {
+      transform: scale(0.95);
+      /* 点击时缩小到95% */
+    }
+
+    .item:hover {
+      transform: scale(1.05);
+      /* hover时放大到105%（可选增强体验） */
+    }
+
+    .icon-container {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+
+    /* 图片适配样式 */
+    .icon-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      /* 保持图片比例，适应容器 */
+    }
+
+    .text {
+      font-weight: bold;
+      font-size: 15px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- 三星商城 -->
+    <a href="https://www.samsung.com.cn/" class="item" target="_blank">
+      <div class="icon-container">
+        <img src="./resources/icons/web-icon-samsung.png" alt="Samsung图标" class="icon-img">
+      </div>
+      <span class="text">三星商城</span>
+    </a>
+
+    <!-- Apple -->
+    <a href="https://www.apple.com.cn" class="item" target="_blank">
+      <div class="icon-container">
+        <img src="./resources/icons/web-icon-apple.png" alt="Apple图标" class="icon-img">
+      </div>
+      <span class="text">Apple</span>
+    </a>
+
+    <!-- 百度 -->
+    <a href="https://www.baidu.com/" class="item" target="_blank">
+      <div class="icon-container">
+        <img src="./resources/icons/web-icon-baidu.png" alt="百度图标" class="icon-img">
+      </div>
+      <span class="text">百度</span>
+    </a>
+
+    <!-- Google -->
+    <a href="https://www.google.com/" class="item" target="_blank">
+      <div class="icon-container">
+        <img src="./resources/icons/web-icon-google.png" alt="Google图标" class="icon-img">
+      </div>
+      <span class="text">Google</span>
+    </a>
+
+    <!-- 少数派 -->
+    <a href="https://sspai.com/" class="item" target="_blank">
+      <div class="icon-container">
+        <img src="./resources/icons/web-icon-sspai.png" alt="少数派图标" class="icon-img">
+      </div>
+      <span class="text">少数派</span>
+    </a>
+
+    <!-- 掘金 -->
+    <a href="https://juejin.cn/" class="item" target="_blank">
+      <div class="icon-container">
+        <img src="./resources/icons/web-icon-juejin.png" alt="掘金图标" class="icon-img">
+      </div>
+      <span class="text">掘金</span>
+    </a>
+
+    <!-- VPN -->
+    <a href="https://web3vpn.net/" class="item" target="_blank">
+      <div class="icon-container">
+        <img src="./resources/icons/web-icon-vpn.png" alt="VPN图标" class="icon-img">
+      </div>
+      <span class="text">VPN</span>
+    </a>
+
+  </div>
+
+  <script>
+    function adjustLayout() {
+      const container = document.querySelector('.container');
+      const viewportHeight = window.innerHeight;
+      const bodyPadding = 16;
+
+      const containerHeight = container.offsetHeight;
+      const totalContentHeight = containerHeight + bodyPadding;
+
+      document.body.style.overflowY = totalContentHeight > viewportHeight ? 'auto' : 'hidden';
+
+      const containerWidth = container.offsetWidth;
+      const viewportWidth = window.innerWidth;
+
+      if (containerWidth > viewportWidth) {
+        const items = document.querySelectorAll('.item');
+        items.forEach(item => {
+          const currentPadding = parseInt(getComputedStyle(item).padding);
+          if (currentPadding > 2) {
+            item.style.padding = (currentPadding - 1) + 'px';
+          }
+        });
+        adjustLayout();
+      }
+    }
+
+    window.addEventListener('load', adjustLayout);
+    window.addEventListener('resize', adjustLayout);
+  </script>
+</body>
+
+</html>
